@@ -1,11 +1,8 @@
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req in
-        return "It works!"
-    }
-
-    app.get("hello") { req -> String in
-        return "Hello, world!"
-    }
+    let cvController = CVController()
+    let apiRoutes = app.grouped("api", "v1")
+    
+    try apiRoutes.grouped("cvs").register(collection: cvController)
 }
